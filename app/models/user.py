@@ -22,4 +22,5 @@ def user_mongo_schema(user) -> dict:
         "createdAt": datetime.utcnow(),
         "updatedAt": datetime.utcnow(),
         "isActive": True,
+        "motive": user.motive.motive,
     }

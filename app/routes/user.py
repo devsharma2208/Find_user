@@ -22,19 +22,30 @@ def user_helper(user) -> dict:
         "address": user.get("address"),
         "createdAt": user.get("createdAt"),
         "updatedAt": user.get("updatedAt"),
+        "motive": user.get("motive"),
     }
 
 
 @router.post("/signup")
 async def signup(user: UserSignup):
 
-    # Check existing user
-    existing = await users_collection.find_one({"email": user.email})
-    if existing:
-        raise HTTPException(status_code=400, detail="Email already exists")
+    # Check existing user by email or number
+    search_conditions = []
+    if user.email:
+        search_conditions.append({"email": user.email})
+    if user.number:
+        search_conditions.append({"number": user.number})
+
+    if search_conditions:
+        existing = await users_collection.find_one({"$or": search_conditions})
+        if existing:
+            raise HTTPException(status_code=400, detail="A user with this email or number already exists")
 
     user_dict = user.dict()
-    user_dict["password"] = hash_password(user.password)
+    if user.password:
+        user_dict["password"] = hash_password(user.password)
+    else:
+        user_dict.pop("password", None)
 
     # ✅ timestamps add karo
     user_dict["createdAt"] = datetime.utcnow()
