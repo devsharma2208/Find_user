@@ -16,6 +16,7 @@ db = client["findUser"]
 users_collection = db["users"]
 activities_collection = db["activities"]
 subscriptions_collection = db["subscriptions"]
+slots_collection = db["slots"]
 
 
 # ✅ Test Connection

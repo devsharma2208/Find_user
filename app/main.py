@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException, Request
-from app.config.db import connect_db, close_db, users_collection
+from app.config.db import connect_db, close_db, users_collection, slots_collection
 from app.routes.user import router as user_router  # ✅ ADD THIS
+from app.routes.slot import router as slot_router
 
 app = FastAPI()
 
@@ -13,6 +14,9 @@ async def startup():
     try:
         await connect_db()
         await users_collection.create_index("email", unique=True)
+        await slots_collection.create_index(
+            [("provider_user_id", 1), ("date", 1), ("time", 1), ("status", 1)]
+        )
 
         app.state.db_connected = True
         print("✅ Database connected successfully")
@@ -32,6 +36,7 @@ async def shutdown():
 
 # ================= ROUTES =================
 app.include_router(user_router)  # ✅ THIS LINE IS IMPORTANT
+app.include_router(slot_router)
 
 
 # ================= HEALTH APIs =================
