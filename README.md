@@ -579,3 +579,4 @@ http://localhost:8000/uploads/ids/<filename>
 | `bookings`    | Bookings + full session lifecycle            |
 | `activities`  | (pending)                                    |
 | `subscriptions` | (pending)                                  |
+
