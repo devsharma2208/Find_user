@@ -6,8 +6,17 @@ load_dotenv()
 
 MONGO_URI = os.getenv("MONGO_URI")
 
-# Create client
-client = AsyncIOMotorClient(MONGO_URI)
+if not MONGO_URI:
+    print("⚠️  MONGO_URI environment variable is not set")
+
+# Create client — short timeouts so a bad connection fails fast instead of
+# hanging the app's startup (which would otherwise delay port binding on
+# platforms like Render and trigger a port-scan timeout)
+client = AsyncIOMotorClient(
+    MONGO_URI,
+    serverSelectionTimeoutMS=5000,
+    connectTimeoutMS=5000,
+)
 
 # Use DB name from your URI (findUser)
 db = client["findUser"]
