@@ -23,4 +23,5 @@ def user_mongo_schema(user) -> dict:
         "updatedAt": datetime.utcnow(),
         "isActive": True,
         "motive": user.motive.motive,
+        "role": user.role
     }

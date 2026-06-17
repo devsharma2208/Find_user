@@ -17,6 +17,8 @@ users_collection = db["users"]
 activities_collection = db["activities"]
 subscriptions_collection = db["subscriptions"]
 slots_collection = db["slots"]
+companions_collection = db["companions"]
+bookings_collection = db["bookings"]
 
 
 # ✅ Test Connection
