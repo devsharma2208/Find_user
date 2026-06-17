@@ -56,6 +56,7 @@ http://localhost:8000
 
 ---
 
+
 ## Auth & User
 
 | Method | Endpoint            | Description                 |
