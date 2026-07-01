@@ -2,7 +2,10 @@
 
 Activity companion booking platform backend built with FastAPI + MongoDB.
 
+
 ---
+
+
 
 ## Tech Stack
 
@@ -52,6 +55,7 @@ http://localhost:8000
 | GET    | `/health` | Full health status       |
 
 ---
+
 
 ## Auth & User
 
@@ -579,3 +583,5 @@ http://localhost:8000/uploads/ids/<filename>
 | `bookings`    | Bookings + full session lifecycle            |
 | `activities`  | (pending)                                    |
 | `subscriptions` | (pending)                                  |
+
+
